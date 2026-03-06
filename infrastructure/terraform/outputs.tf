@@ -18,3 +18,11 @@ output "database_endpoint" {
   value     = aws_db_instance.payment_db.address
   sensitive = true
 }
+
+output "eks_cluster_name" {
+  value = aws_eks_cluster.payment_cluster.name
+}
+
+output "eks_cluster_endpoint" {
+  value = aws_eks_cluster.payment_cluster.endpoint
+}
