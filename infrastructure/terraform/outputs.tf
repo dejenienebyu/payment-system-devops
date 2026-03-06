@@ -13,3 +13,8 @@ output "payment_api_url" {
 output "ssh_command" {
   value = "ssh -i ~/.ssh/payment-system-key.pem ec2-user@${aws_instance.payment_server.public_ip}"
 }
+
+output "database_endpoint" {
+  value     = aws_db_instance.payment_db.address
+  sensitive = true
+}

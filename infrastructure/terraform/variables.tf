@@ -14,3 +14,14 @@ variable "instance_type" {
 variable "key_name" {
   default = "payment-system-key"
 }
+
+variable "db_username" {
+  description = "Database admin username"
+  default     = "paymentadmin"
+}
+
+variable "db_password" {
+  description = "Database password"
+  sensitive   = true
+  default     = "PaymentDB#2026!"
+}
