@@ -37,8 +37,9 @@ app.get('/health', (req, res) => {
   res.json({
     status: 'healthy',
     service: 'payment-api',
-    version: '2.0.0',
+    version: '3.0.0',
     database: 'PostgreSQL RDS',
+    deployment: 'GitHub Actions CI/CD ⚙️',
     timestamp: new Date().toISOString(),
     server: 'AWS EC2 - eu-north-1 - Terraform managed'
   });
@@ -76,6 +77,15 @@ app.post('/pay', async (req, res) => {
   }
 });
 
+app.delete('/transactions', async (req, res) => {
+  try {
+    await pool.query('DELETE FROM transactions');
+    res.json({ message: 'All transactions cleared' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(3000, () => {
-  console.log('✅ Payment API v2.0 running on port 3000 with PostgreSQL');
+  console.log('✅ Payment API v3.0 running - Deployed by GitHub Actions');
 });
