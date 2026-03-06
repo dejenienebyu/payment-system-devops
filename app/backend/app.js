@@ -9,7 +9,7 @@ app.get('/health', (req, res) => {
     status: 'healthy', 
     service: 'payment-api',
     timestamp: new Date().toISOString(),
-    server: 'AWS EC2 - us-east-1'
+    server: 'AWS EC2 - eu-north-1'
   });
 });
 
