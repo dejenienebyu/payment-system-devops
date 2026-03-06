@@ -5,3 +5,5 @@ infrastructure/terraform/terraform.tfstate.backup
 node_modules/
 *.pem
 *.log
+infrastructure/terraform/.env
+infrastructure/terraform/.env
