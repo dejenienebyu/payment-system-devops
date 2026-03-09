@@ -3,11 +3,14 @@ kind: Service
 metadata:
   name: payment-api-service
   namespace: default
+  labels:
+    app: payment-api
 spec:
   selector:
     app: payment-api
   ports:
-  - protocol: TCP
+  - name: http
+    protocol: TCP
     port: 80
     targetPort: 3000
   type: LoadBalancer
