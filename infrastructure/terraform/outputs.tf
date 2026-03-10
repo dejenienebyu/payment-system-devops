@@ -1,3 +1,8 @@
+output "elastic_ip" {
+  value       = aws_eip.payment_eip.public_ip
+  description = "Permanent Elastic IP for EC2"
+}
+
 output "server_ip" {
   value = aws_instance.payment_server.public_ip
 }

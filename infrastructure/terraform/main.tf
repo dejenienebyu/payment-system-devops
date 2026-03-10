@@ -250,3 +250,13 @@ ENVEOF
     Project = "payment-system"
   }
 }
+# ─── ELASTIC IP ───────────────────────────────────────────
+resource "aws_eip" "payment_eip" {
+  instance = aws_instance.payment_server.id
+  domain   = "vpc"
+
+  tags = {
+    Name    = "payment-server-eip"
+    Project = "payment-system"
+  }
+}
