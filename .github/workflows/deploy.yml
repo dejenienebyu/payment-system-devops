@@ -77,17 +77,30 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            # Ensure Docker is running
+            sudo systemctl start docker
+            sudo systemctl enable docker
+
+            # Login to ECR
             aws ecr get-login-password --region eu-north-1 | \
               docker login --username AWS --password-stdin \
               ${{ secrets.ECR_REPOSITORY }}
+
+            # Pull latest image
             docker pull ${{ secrets.ECR_REPOSITORY }}:latest
-            docker rm -f payment-api 2>/dev/null || true
-            docker run -d \
+
+            # Stop old container
+            sudo docker rm -f payment-api 2>/dev/null || true
+
+            # Start new container
+            sudo docker run -d \
               --name payment-api \
               -p 3000:3000 \
               --env-file /home/ec2-user/payment-app/.env \
               --restart unless-stopped \
               ${{ secrets.ECR_REPOSITORY }}:latest
+
+            # Verify
             sleep 5
-            docker ps | grep payment-api
+            sudo docker ps | grep payment-api
             echo "✅ Deployment complete!"
